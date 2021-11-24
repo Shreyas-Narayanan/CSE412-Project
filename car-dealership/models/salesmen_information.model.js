@@ -5,13 +5,13 @@ module.exports = (sequelize, Sequelize) => {
         autoIncrement: true // Auto converts to Serial in Postgres
       },
       first_name: {
-        type: Sequelize.TEXT
+        type: DataTypes.TEXT
       },
       last_name: {
-        type: Sequelize.TEXT
+        type: DataTypes.TEXT
       },
       years_worked: {
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER
       }
     });
   
