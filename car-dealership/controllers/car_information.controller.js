@@ -36,3 +36,67 @@ exports.create = (req, res) => {
             });
         });
 };
+
+// Find all car_information entries for a make
+exports.findAllMake = (req, res) => {
+    const make = req.query.make;
+    var condition = make ? { make: { [Op.iLike]: `%${make}%` } } : null;
+  
+    Car_info.findAll({ where: condition })
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving car information entries."
+        });
+      });
+  };
+
+// Find car_information by car_id
+exports.findOne = (req, res) => {
+    const car_id = req.params.car_id;
+  
+    Car_info.findByPk(car_id)
+      .then(data => {
+        if (data) {
+          res.send(data);
+        } else {
+          res.status(404).send({
+            message: `Cannot find car_information with id=${car_id}.`
+          });
+        }
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error retrieving car_information with id=" + car_id
+        });
+      });
+};
+
+// Update car_information through car_id
+exports.update = (req, res) => {
+    const car_id = req.params.car_id;
+  
+    Car_info.update(req.body, {
+      where: { car_id: car_id }
+    })
+      .then(num => {
+        if (num == 1) {
+          res.send({
+            message: "car_information was updated successfully."
+          });
+        } else {
+          res.send({
+            message: `Cannot update car_information with id=${car_id}.`
+          });
+        }
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error updating car_information with id=" + car_id
+        });
+      });
+};
+
