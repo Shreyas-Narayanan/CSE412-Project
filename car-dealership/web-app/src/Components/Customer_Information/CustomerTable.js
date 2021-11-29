@@ -6,7 +6,7 @@ import ListCustomers from './ListCustomers';
 export default function CustomerTable() {
     return (
         <Fragment>
-            <h1 className='text-center mt-5'>Customer Information Table</h1>
+            <h2 className='text-center mt-5'>Customer Information Table</h2>
             <ListCustomers/>
             <InputCustomers/>
         </Fragment>

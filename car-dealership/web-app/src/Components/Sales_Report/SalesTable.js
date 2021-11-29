@@ -6,7 +6,7 @@ import ListSales from './ListSales';
 export default function SalesTable() {
     return (
         <Fragment>
-            <h1 className='text-center mt-5'>Sales Table</h1>
+            <h2 className='text-center mt-5'>Sales Table</h2>
             <ListSales/>
             <InputSales/>
         </Fragment>

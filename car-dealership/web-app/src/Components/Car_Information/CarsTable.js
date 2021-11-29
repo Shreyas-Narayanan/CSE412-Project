@@ -6,7 +6,7 @@ import ListCars from './ListCars';
 export default function CarsTable() {
     return (
         <Fragment>
-            <h1 className='text-center mt-5'>Car Information Table</h1>
+            <h2 className='text-center mt-5'>Car Information Table</h2>
             <ListCars/>
             <InputCars/>
         </Fragment>

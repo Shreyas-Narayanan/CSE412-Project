@@ -6,7 +6,7 @@ import ListMan from './ListMan';
 export default function ManTable() {
     return (
         <Fragment>
-            <h1 className='text-center mt-5'>Salesman Table</h1>
+            <h2 className='text-center mt-5'>Salesman Table</h2>
             <ListMan/>
             <InputMan/>
         </Fragment>

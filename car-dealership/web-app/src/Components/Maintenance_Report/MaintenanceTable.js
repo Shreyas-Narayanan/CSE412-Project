@@ -6,7 +6,7 @@ import ListMaintenance from './ListMaintenance';
 export default function MaintenanceTable() {
     return (
         <Fragment>
-            <h1 className='text-center mt-5'>Maintenance Table</h1>
+            <h2 className='text-center mt-5'>Maintenance Table</h2>
             <ListMaintenance/>
             <InputMaintenace/>
         </Fragment>

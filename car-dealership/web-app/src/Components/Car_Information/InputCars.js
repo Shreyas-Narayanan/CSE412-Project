@@ -41,6 +41,7 @@ export default function InputCars() {
         setYear(e.target.value);
     }
 
+    // eslint-disable-next-line
     const onEditNew = (e) => {
         setNew(e.target.value);
     }

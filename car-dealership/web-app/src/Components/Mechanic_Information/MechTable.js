@@ -6,7 +6,7 @@ import ListMech from './ListMech';
 export default function MechTable() {
     return (
         <Fragment>
-            <h1 className='text-center mt-5'>Mechanic Table</h1>
+            <h2 className='text-center mt-5'>Mechanic Table</h2>
             <ListMech/>
             <InputMech/>
         </Fragment>

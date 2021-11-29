@@ -10,6 +10,7 @@ import MechTable from './Components/Mechanic_Information/MechTable';
 function App() {
   return (
     <div className = "container">
+      <h1 className='text-center mt-5 text-primary'>Welcome to our Car Dealership!</h1>
       <CarsTable/>
       <CustomerTable/>
       <ManTable/>
