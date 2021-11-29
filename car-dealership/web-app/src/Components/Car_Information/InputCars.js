@@ -1,4 +1,4 @@
-import React, {Fragment, useState, useEffect} from 'react';
+import React, {Fragment, useState} from 'react';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 
@@ -11,7 +11,7 @@ export default function InputCars() {
         setMake("");
         setModel("");
         setYear("");
-        setNew("");
+        setNew("true");
         setColor("");
         setPrice("");
         setShow(true);
@@ -21,7 +21,7 @@ export default function InputCars() {
     const [make, setMake] = useState("");
     const [model, setModel] = useState("");
     const [year, setYear] = useState("");
-    const [isNew, setNew] = useState("");
+    const [isNew, setNew] = useState("true");
     const [color, setColor] = useState("");
     const [price, setPrice] = useState("");
 
@@ -73,7 +73,7 @@ export default function InputCars() {
     return(
         <Fragment>
             <div className="d-grid gap-2">
-            <Button variant="primary" size ="lg" onClick={handleShow}>
+            <Button variant="primary" size ="lg" className="mb-5" onClick={handleShow}>
                 Add a New Car
             </Button>
             </div>
@@ -91,8 +91,8 @@ export default function InputCars() {
                         <input type='text' className='form-control' value={model} onChange={onEditModel}/>
                         <h6>Year</h6>
                         <input type='text' className='form-control' value={year} onChange={onEditYear}/>
-                        <h6>New</h6>
-                        <input type='text' className='form-control' value={isNew} onChange={onEditNew}/>
+                        {/* <h6>New</h6>
+                        <input type='text' className='form-control' value={isNew} onChange={onEditNew}/> */}
                         <h6>Color</h6>
                         <input type='text' className='form-control' value={color} onChange={onEditColor}/>
                         <h6>Price</h6>

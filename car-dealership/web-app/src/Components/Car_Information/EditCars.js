@@ -92,8 +92,8 @@ export default function EditCars({car}) {
                         <input type='text' className='form-control' value={model} onChange={onEditModel}/>
                         <h6>Year</h6>
                         <input type='text' className='form-control' value={year} onChange={onEditYear}/>
-                        <h6>New</h6>
-                        <input type='text' className='form-control' value={isNew} onChange={onEditNew}/>
+                        {/* <h6>New</h6>
+                        <input type='text' className='form-control' value={isNew} onChange={onEditNew}/> */}
                         <h6>Color</h6>
                         <input type='text' className='form-control' value={color} onChange={onEditColor}/>
                         <h6>Price</h6>

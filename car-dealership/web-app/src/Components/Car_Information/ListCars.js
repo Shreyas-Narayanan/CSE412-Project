@@ -42,7 +42,7 @@ export default function ListCars() {
                         <th>Make</th>
                         <th>Model</th>
                         <th>Year</th>
-                        <th>New</th>
+                        {/* <th>New</th> */}
                         <th>Price</th>
                         <th>Edit</th>
                         <th>Delete</th>
@@ -56,7 +56,7 @@ export default function ListCars() {
                             <td>{car.make}</td>
                             <td>{car.model}</td>
                             <td>{car.year}</td>
-                            <td>{car.new}</td>
+                            {/* <td>{car.new}</td> */}
                             <td>{car.price}</td>
                             <td>
                                 <EditCars car={car}/>
