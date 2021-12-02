@@ -4,6 +4,7 @@ import EditMaintenance from './EditMaintenace';
 export default function ListMaintenance() {
 
     const [main, setMain] = useState([]);
+    const [filteredMain, setFilteredMain] = useState(main);
 
     const deleteMain = async (id) => {
         try {
@@ -12,7 +13,7 @@ export default function ListMaintenance() {
                 method: "DELETE"
             });
 
-            setMain(main.filter(m => m.ticket_id !== id));
+            setFilteredMain(main.filter(m => m.ticket_id !== id));
         } catch (err) {
             console.log(err.message);
         }
@@ -23,6 +24,7 @@ export default function ListMaintenance() {
             const response = await fetch('http://localhost:5000/maintenance');
             const jsonData = await response.json();
             setMain(jsonData);
+            setFilteredMain(jsonData);
         } catch (err) {
             console.log(err.message);
         }
@@ -32,8 +34,19 @@ export default function ListMaintenance() {
         getMain();
     },[]);
 
+    const handleSearch = (event) => {
+        let value = event.target.value;
+        let result = [];
+        console.log(event.target.value);
+        result = main.filter((data) => {
+            return (data.car_issue.search(value) !== -1 || data.date_received.search(value) !== -1 || data.date_returned.search(value) !== -1);
+        });
+        setFilteredMain(result);
+    }
+
     return (
         <Fragment>
+            <input type="text" className='form-control' placeholder = "Search Maintenance" onChange={(event) =>handleSearch(event)} />
             <table className="table mt-5 text-center">
                 <thead>
                     <tr>
@@ -49,7 +62,7 @@ export default function ListMaintenance() {
                     </tr>
                 </thead>
                 <tbody>
-                    {main.map(m => (
+                    {filteredMain.map(m => (
                         <tr key = {m.ticket_id}>
                             <td>{m.ticket_id}</td>
                             <td>{m.car_id}</td>

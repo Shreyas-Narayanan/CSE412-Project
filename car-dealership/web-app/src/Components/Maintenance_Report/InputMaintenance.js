@@ -85,9 +85,9 @@ export default function InputMaintenace() {
                         <input type='text' className='form-control' value={mechanic_id} onChange={onEditMech}/>
                         <h6>Car Issue</h6>
                         <input type='text' className='form-control' value={car_issue} onChange={onEditIssue}/>
-                        <h6>Date Received</h6>
+                        <h6>Date Received (YYYY-MM-DD)</h6>
                         <input type='text' className='form-control' value={date_received} onChange={onEditReceived}/>
-                        <h6>Date Returned</h6>
+                        <h6>Date Returned (YYYY-MM-DD)</h6>
                         <input type='text' className='form-control' value={date_returned} onChange={onEditReturned}/>
                     </div>
                 </Modal.Body>

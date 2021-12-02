@@ -4,6 +4,7 @@ import EditMan from './EditMan';
 export default function ListMan() {
 
     const [man, setMan] = useState([]);
+    const [fman, setFilteredMan] = useState(man);
 
     const deleteMan = async (id) => {
         try {
@@ -12,7 +13,7 @@ export default function ListMan() {
                 method: "DELETE"
             });
 
-            setMan(man.filter(m => m.salesman_id !== id));
+            setFilteredMan(man.filter(m => m.salesman_id !== id));
         } catch (err) {
             console.log(err.message);
         }
@@ -23,6 +24,7 @@ export default function ListMan() {
             const response = await fetch('http://localhost:5000/salesman');
             const jsonData = await response.json();
             setMan(jsonData);
+            setFilteredMan(jsonData);
         } catch (err) {
             console.log(err.message);
         }
@@ -32,8 +34,19 @@ export default function ListMan() {
         getMans();
     },[]);
 
+    const handleSearch = (event) => {
+        let value = event.target.value;
+        let result = [];
+        console.log(event.target.value);
+        result = man.filter((data) => {
+            return (data.first_name.search(value) !== -1 || data.last_name.search(value) !== -1);
+        });
+        setFilteredMan(result);
+    }
+
     return (
         <Fragment>
+            <input type="text" className='form-control' placeholder = "Search Salesman" onChange={(event) =>handleSearch(event)} />
             <table className="table mt-5 text-center">
                 <thead>
                     <tr>
@@ -46,7 +59,7 @@ export default function ListMan() {
                     </tr>
                 </thead>
                 <tbody>
-                    {man.map(m => (
+                    {fman.map(m => (
                         <tr key = {m.salesman_id}>
                             <td>{m.salesman_id}</td>
                             <td>{m.first_name}</td>

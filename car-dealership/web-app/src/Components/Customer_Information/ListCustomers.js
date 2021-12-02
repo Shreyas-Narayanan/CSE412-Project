@@ -4,6 +4,8 @@ import EditCustomers from './EditCustomers';
 export default function ListCustomers() {
 
     const [customers, setCustomers] = useState([]);
+    const [filteredCust, setFilteredCust] = useState(customers);
+
 
     const deleteCustomer = async (id) => {
         try {
@@ -12,7 +14,7 @@ export default function ListCustomers() {
                 method: "DELETE"
             });
 
-            setCustomers(customers.filter(customer => customer.customer_id !== id));
+            setFilteredCust(customers.filter(customer => customer.customer_id !== id));
         } catch (err) {
             console.log(err.message);
         }
@@ -23,6 +25,7 @@ export default function ListCustomers() {
             const response = await fetch('http://localhost:5000/customers');
             const jsonData = await response.json();
             setCustomers(jsonData);
+            setFilteredCust(jsonData);
         } catch (err) {
             console.log(err.message);
         }
@@ -32,8 +35,19 @@ export default function ListCustomers() {
         getCustomers();
     },[]);
 
+    const handleSearch = (event) => {
+        let value = event.target.value;
+        let result = [];
+        console.log(event.target.value);
+        result = customers.filter((data) => {
+            return (data.first_name.search(value) !== -1 || data.last_name.search(value) !== -1 || data.phone_number.search(value) !== -1 || data.address.search(value) !== -1 || data.city.search(value) !== -1 || data.state.search(value) !== -1 || data.country.search(value) !== -1);
+        });
+        setFilteredCust(result);
+    }
+
     return (
         <Fragment>
+            <input type="text" className='form-control' placeholder = "Search Customers" onChange={(event) =>handleSearch(event)} />
             <table className="table mt-5 text-center">
                 <thead>
                     <tr>
@@ -51,7 +65,7 @@ export default function ListCustomers() {
                     </tr>
                 </thead>
                 <tbody>
-                    {customers.map(customer => (
+                    {filteredCust.map(customer => (
                         <tr key = {customer.customer_id}>
                             <td>{customer.customer_id}</td>
                             <td>{customer.first_name}</td>

@@ -4,6 +4,7 @@ import EditSales from './EditSales';
 export default function ListSales() {
 
     const [sales, setSales] = useState([]);
+    const [filteredSales, setFilteredSales] = useState(sales);
 
     const deleteSale = async (id) => {
         try {
@@ -12,7 +13,7 @@ export default function ListSales() {
                 method: "DELETE"
             });
 
-            setSales(sales.filter(sale => sale.sales_id !== id));
+            setFilteredSales(sales.filter(sale => sale.sales_id !== id));
         } catch (err) {
             console.log(err.message);
         }
@@ -23,6 +24,7 @@ export default function ListSales() {
             const response = await fetch('http://localhost:5000/sales');
             const jsonData = await response.json();
             setSales(jsonData);
+            setFilteredSales(jsonData);
         } catch (err) {
             console.log(err.message);
         }
@@ -32,8 +34,19 @@ export default function ListSales() {
         getSales();
     },[]);
 
+    const handleSearch = (event) => {
+        let value = event.target.value;
+        let result = [];
+        console.log(event.target.value);
+        result = sales.filter((data) => {
+            return (data.date.search(value) !== -1);
+        });
+        setFilteredSales(result);
+    }
+
     return (
         <Fragment>
+            <input type="text" className='form-control' placeholder = "Search Sales" onChange={(event) =>handleSearch(event)} />
             <table className="table mt-5 text-center">
                 <thead>
                     <tr>
@@ -47,7 +60,7 @@ export default function ListSales() {
                     </tr>
                 </thead>
                 <tbody>
-                    {sales.map(sale => (
+                    {filteredSales.map(sale => (
                         <tr key = {sale.sales_id}>
                             <td>{sale.sales_id}</td>
                             <td>{sale.car_id}</td>
